@@ -1,0 +1,86 @@
+openapi: 3.0.0
+info:
+  title: FakeStoreNet User & Auth API
+  version: "1.0.0"
+servers:
+  - url: https://api.fakestorenet.local
+paths:
+  /users:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /auth/login:
+    post:
+      summary: Authenticate user and return JWT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+components:
+  schemas:
+    NewUser:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+    Credentials:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        name:
+          $ref: '#/components/schemas/Name'
+    Name:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        expiresIn:
+          type: integer

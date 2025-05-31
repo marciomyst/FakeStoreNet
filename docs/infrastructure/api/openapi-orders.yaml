@@ -1,0 +1,109 @@
+openapi: 3.0.0
+info:
+  title: FakeStoreNet Cart API
+  version: "1.0.0"
+servers:
+  - url: https://api.fakestorenet.local
+paths:
+  /carts:
+    post:
+      summary: Create a new shopping cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCart'
+      responses:
+        '201':
+          description: Cart created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+  /carts/{cartId}/items:
+    post:
+      summary: Add item to cart
+      parameters:
+        - in: path
+          name: cartId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemAdd'
+      responses:
+        '200':
+          description: Item added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+  /carts/{cartId}/items/{productId}:
+    delete:
+      summary: Remove item from cart
+      parameters:
+        - in: path
+          name: cartId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Item removed
+  /carts/{cartId}/checkout:
+    post:
+      summary: Checkout cart
+      parameters:
+        - in: path
+          name: cartId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Cart checked out
+components:
+  schemas:
+    NewCart:
+      type: object
+      properties:
+        userId:
+          type: integer
+    CartItemAdd:
+      type: object
+      properties:
+        productId:
+          type: integer
+        quantity:
+          type: integer
+    Cart:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        date:
+          type: string
+          format: date-time
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+    CartItem:
+      type: object
+      properties:
+        productId:
+          type: integer
+        quantity:
+          type: integer
