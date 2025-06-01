@@ -27,3 +27,58 @@ High
 ## Attachments & References
 - docs/infrastructure/observability.md  
 - docs/infrastructure/api/openapi-orders.yaml
+
+## Technical Refinement
+
+- Health Checks Registration:
+  - Use `services.AddHealthChecks()` in `Startup`/`Program` to register checks:
+    - `.AddDbContextCheck<YourDbContext>("Database")`
+    - `.AddCheck<CacheHealthCheck>("Cache")`
+    - `.AddCheck<BrokerHealthCheck>("MessageBroker")`
+  - Tag readiness checks with `"ready"` and liveness checks with `"live"`.
+
+- Endpoint Mapping:
+  - Map `/health/live` for liveness: 
+    ```csharp
+    app.MapHealthChecks("/health/live", new HealthCheckOptions { Predicate = _ => false });
+    ```
+  - Map `/health/ready` for readiness:
+    ```csharp
+    app.MapHealthChecks("/health/ready", new HealthCheckOptions { Predicate = hc => hc.Tags.Contains("ready") });
+    ```
+  - Configure `ResponseWriter` to output detailed JSON.
+
+- OpenAPI Documentation:
+  - Add `/health/live` and `/health/ready` paths to the Swagger YAML spec.
+  - Include response schemas for health check results under `components.schemas.HealthReport`.
+
+- Testing Strategy:
+  - Write integration tests using `WebApplicationFactory` to call both endpoints.
+  - Simulate service failures in tests to verify correct HTTP status codes (200 vs 503).
+  - Ensure health checks reflect actual component states.
+
+This section details the technical steps to implement robust health and readiness probes in the application.
+
+## Test Cases
+
+```gherkin
+Feature: Health Checks and Readiness Probes
+
+  Scenario: Liveness endpoint returns 200 when application is running
+    Given the application is started
+    When a GET request is made to `/health/live`
+    Then the response status should be 200
+    And the response body should indicate liveness OK
+
+  Scenario: Readiness endpoint returns 503 when dependencies are down
+    Given the database is unreachable
+    When a GET request is made to `/health/ready`
+    Then the response status should be 503
+    And the response body should include "Database" in the failing checks
+
+  Scenario: Readiness endpoint returns 200 when all components are healthy
+    Given the database, cache, and broker are operational
+    When a GET request is made to `/health/ready`
+    Then the response status should be 200
+    And the response body should indicate readiness OK
+```
