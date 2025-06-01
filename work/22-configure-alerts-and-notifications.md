@@ -16,8 +16,12 @@ Rationale: ensure immediate incident response, reduce resolution time, and maint
 - Documentation updated in `docs/infrastructure/observability.md` and the deployment runbook.
 
 ## Estimate
-3 points
+**Story Points:** 3 points
 
+## Duration
+**Junior Developer:** 27 hours
+**Regular Developer:** 18 hours
+**Senior Developer:** 12 hours
 ## Priority
 High
 
@@ -117,3 +121,4 @@ Feature: Alerts & Notifications
     When Prometheus Alertmanager evaluates rules
     Then no alert should fire
 ```
+

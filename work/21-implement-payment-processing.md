@@ -12,8 +12,12 @@ Rationale: enable revenue generation by completing sales and providing a reliabl
 - Integration tests validate the full payment flow (authorization → capture).
 
 ## Estimate
-5 points
+**Story Points:** 5 points
 
+## Duration
+**Junior Developer:** 45 hours
+**Regular Developer:** 30 hours
+**Senior Developer:** 20 hours
 ## Priority
 High
 
@@ -94,3 +98,4 @@ Feature: Payment Processing Integration
     When HandleWebhookAsync is called with the event payload
     Then the corresponding Order status should be updated to "Paid"
 ```
+

@@ -11,8 +11,12 @@ Rationale: reduce manual errors, accelerate delivery, and maintain environment c
 - Migration execution logs are captured and stored.
 
 ## Estimate
-3 points
+**Story Points:** 3 points
 
+## Duration
+**Junior Developer:** 27 hours
+**Regular Developer:** 18 hours
+**Senior Developer:** 12 hours
 ## Priority
 High
 
@@ -96,3 +100,4 @@ Feature: CI/CD Database Migrations
     When migrations step is executed
     Then the CI job should fail and show error output
 ```
+

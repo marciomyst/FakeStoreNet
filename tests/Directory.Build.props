@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutputFormat>cobertura</CoverletOutputFormat>
+    <CoverletOutput>../../TestResults/</CoverletOutput>
+    <Include>[ProjetoA*]*,[ProjetoB*]*</Include>
+    <Exclude>[*.Tests*]*,[xunit*]*,[*]*.g.cs,[Coverlet.*]*</Exclude>
+  </PropertyGroup>
+</Project>

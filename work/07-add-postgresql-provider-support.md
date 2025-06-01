@@ -11,8 +11,12 @@ Rationale: provide a robust and widely adopted production alternative, ensuring 
 - Integration tests validate basic CRUD operations against a PostgreSQL instance (e.g., using a Docker container).
 
 ## Estimate
-5 points
+**Story Points:** 5 points
 
+## Duration
+**Junior Developer:** 45 hours
+**Regular Developer:** 30 hours
+**Senior Developer:** 20 hours
 ## Priority
 High
 
@@ -91,3 +95,4 @@ Feature: PostgreSQL Provider Support
     When creating, updating, and querying an entity via the DbContext
     Then all operations should succeed without exceptions
 ```
+

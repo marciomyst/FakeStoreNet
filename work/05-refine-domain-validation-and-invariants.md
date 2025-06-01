@@ -11,8 +11,12 @@ Rationale: prevent invalid states in the domain, improving reliability and reduc
 - Unit tests cover both positive and negative validation scenarios for all entities.
 
 ## Estimate
-3 points
+**Story Points:** 3 points
 
+## Duration
+**Junior Developer:** 27 hours
+**Regular Developer:** 18 hours
+**Senior Developer:** 12 hours
 ## Priority
 High
 
@@ -73,3 +77,4 @@ Feature: Domain Validation and Invariants
     When entities and value objects are created
     Then no exceptions should be thrown
 ```
+

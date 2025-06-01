@@ -12,8 +12,12 @@ Rationale: ensure business scenarios are specified in Gherkin and validated end-
 - Failures in SpecFlow acceptance tests fail the build and block PR merges.
 
 ## Estimate
-5 points
+**Story Points:** 5 points
 
+## Duration
+**Junior Developer:** 45 hours
+**Regular Developer:** 30 hours
+**Senior Developer:** 20 hours
 ## Priority
 High
 
@@ -51,3 +55,4 @@ High
   - Group scenarios by tags (`@regression`, `@smoke`) for selective test execution.
 
 This section details the technical requirements for implementing robust end-to-end acceptance tests covering key user flows.
+

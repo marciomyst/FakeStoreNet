@@ -12,8 +12,12 @@ Rationale: ensure security and separation of responsibilities, allowing only aut
 - Integration tests validate allowed and denied access based on roles.
 
 ## Estimate
-3 points
+**Story Points:** 3 points
 
+## Duration
+**Junior Developer:** 27 hours
+**Regular Developer:** 18 hours
+**Senior Developer:** 12 hours
 ## Priority
 High
 
@@ -73,3 +77,4 @@ Feature: Role-Based Authorization
     When the user sends a GET request to /api/orders
     Then the response status should be 401 Unauthorized
 ```
+

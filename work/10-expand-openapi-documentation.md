@@ -12,8 +12,12 @@ Rationale: improve communication with external teams, facilitate API consumption
 - Automated contract tests validate compliance between implementation and specification.
 
 ## Estimate
-3 points
+**Story Points:** 3 points
 
+## Duration
+**Junior Developer:** 27 hours
+**Regular Developer:** 18 hours
+**Senior Developer:** 12 hours
 ## Priority
 High
 
@@ -77,3 +81,4 @@ Feature: OpenAPI Documentation Validation
     When the OpenAPI spec lists 400 as a possible response
     Then automated contract tests should pass for that error scenario
 ```
+

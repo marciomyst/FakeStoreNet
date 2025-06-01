@@ -12,8 +12,12 @@ Rationale: expand product reach to users in different regions, improving global 
 - Integration tests validate language switching and formatting.
 
 ## Estimate
-5 points
+**Story Points:** 5 points
 
+## Duration
+**Junior Developer:** 45 hours
+**Regular Developer:** 30 hours
+**Senior Developer:** 20 hours
 ## Priority
 Medium
 
@@ -87,3 +91,4 @@ Feature: Internationalization and Localization
     When a request is made to "/api/products"
     Then the response should use default culture "en-US"
 ```
+

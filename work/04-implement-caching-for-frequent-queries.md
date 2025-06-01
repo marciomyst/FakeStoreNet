@@ -11,8 +11,12 @@ Rationale: improve performance and scalability by providing faster responses to 
 - Unit and integration tests validate caching behavior.
 
 ## Estimate
-3 points
+**Story Points:** 3 points
 
+## Duration
+**Junior Developer:** 27 hours
+**Regular Developer:** 18 hours
+**Senior Developer:** 12 hours
 ## Priority
 Medium
 
@@ -80,3 +84,4 @@ Feature: Caching for Frequent Queries
     When GetAllProductsQueryHandler processes a request
     Then a hit or miss metric should be emitted with appropriate tag values
 ```
+

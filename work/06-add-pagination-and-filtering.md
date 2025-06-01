@@ -11,8 +11,12 @@ Rationale: enable efficient retrieval of product subsets, improve user experienc
 - Integration tests validate pagination and filtering behavior correctly.
 
 ## Estimate
-3 points
+**Story Points:** 3 points
 
+## Duration
+**Junior Developer:** 27 hours
+**Regular Developer:** 18 hours
+**Senior Developer:** 12 hours
 ## Priority
 High
 
@@ -72,3 +76,4 @@ Feature: Pagination and Filtering
     When GetAllProductsQuery is executed with filter category="Electronics", minPrice=100, maxPrice=200
     Then only products matching those filters should be returned
 ```
+

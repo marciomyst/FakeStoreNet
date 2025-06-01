@@ -12,8 +12,12 @@ Rationale: enable end-to-end performance analysis in DataDog, identify bottlenec
 - Integration tests validate that spans are generated and exported.
 
 ## Estimate
-3 points
+**Story Points:** 3 points
 
+## Duration
+**Junior Developer:** 27 hours
+**Regular Developer:** 18 hours
+**Senior Developer:** 12 hours
 ## Priority
 Medium
 
@@ -91,3 +95,4 @@ Feature: Distributed Tracing
     When a consumer handles the event
     Then the consumer's span should be a child of the original publishing span
 ```
+

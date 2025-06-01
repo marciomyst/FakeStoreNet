@@ -12,8 +12,12 @@ Rationale: support decoupled, scalable, and resilient communication via Azure Se
 - Integration tests verify the sending and consumption of at least one event type.
 
 ## Estimate
-5 points
+**Story Points:** 5 points
 
+## Duration
+**Junior Developer:** 45 hours
+**Regular Developer:** 30 hours
+**Senior Developer:** 20 hours
 ## Priority
 High
 
@@ -77,3 +81,4 @@ Feature: Message Broker Integration
     Then it should retry according to configured retry policy
     And eventually succeed or move the message to dead-letter queue
 ```
+

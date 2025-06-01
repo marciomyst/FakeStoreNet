@@ -12,8 +12,12 @@ Rationale: ensure orchestrators and observability systems can detect health stat
 - Integration tests validate the behavior of the health endpoints.
 
 ## Estimate
-3 points
+**Story Points:** 3 points
 
+## Duration
+**Junior Developer:** 27 hours
+**Regular Developer:** 18 hours
+**Senior Developer:** 12 hours
 ## Priority
 High
 
@@ -82,3 +86,4 @@ Feature: Health Checks and Readiness Probes
     Then the response status should be 200
     And the response body should indicate readiness OK
 ```
+

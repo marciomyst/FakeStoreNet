@@ -24,8 +24,8 @@ Represents a postal address.
 
 Encapsulates geographic coordinates.
 
-- `Latitude` (string, non-empty, valid format)  
-- `Longitude` (string, non-empty, valid format)
+- `Latitude` (decimal, -90 ≤ latitude ≤ 90)  
+- `Longitude` (decimal, -180 ≤ longitude ≤ 180)
 
 ## Rating
 

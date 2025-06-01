@@ -11,8 +11,12 @@ Rationale: reduce regressions, facilitate future refactoring, and increase confi
 - Builds fail if the minimum coverage threshold is not met.
 
 ## Estimate
-5 points
+**Story Points:** 5 points
 
+## Duration
+**Junior Developer:** 45 hours
+**Regular Developer:** 30 hours
+**Senior Developer:** 20 hours
 ## Priority
 High
 
@@ -71,3 +75,4 @@ Feature: Enforce Unit Test Coverage Threshold
     When CI pipeline completes test step
     Then the coverage report should be uploaded as a CI artifact
 ```
+

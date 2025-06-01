@@ -15,8 +15,12 @@ Rationale: promote reuse across multiple projects, simplify maintenance, and ena
 - Unit tests for the package achieve ≥ 90% coverage.
 
 ## Estimate
-5 points
+**Story Points:** 5 points
 
+## Duration
+**Junior Developer:** 45 hours
+**Regular Developer:** 30 hours
+**Senior Developer:** 20 hours
 ## Priority
 Medium
 
@@ -94,3 +98,4 @@ Feature: Generic Domain NuGet Package
     When tests are executed
     Then coverage report should show ≥90% coverage for Domain.Common
 ```
+

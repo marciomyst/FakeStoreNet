@@ -14,8 +14,12 @@ Rationale: provide real-time visibility into application behavior using DataDog'
 - Basic monitors and alerts with defined thresholds are configured in DataDog.
 
 ## Estimate
-3 points
+**Story Points:** 3 points
 
+## Duration
+**Junior Developer:** 27 hours
+**Regular Developer:** 18 hours
+**Senior Developer:** 12 hours
 ## Priority
 Medium
 
@@ -78,3 +82,4 @@ Feature: DataDog Integration
     When dashboard push script runs
     Then DataDog API should receive dashboard JSON and create/update dashboard without errors
 ```
+

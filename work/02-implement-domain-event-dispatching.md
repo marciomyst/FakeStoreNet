@@ -11,8 +11,12 @@ Rationale: facilitate internal communication and event-driven integration, enabl
 - Unit test coverage ≥ 80% for the event publishing and consumption flow.
 
 ## Estimate
-5 points
+**Story Points:** 5 points
 
+## Duration
+**Junior Developer:** 45 hours
+**Regular Developer:** 30 hours
+**Senior Developer:** 20 hours
 ## Priority
 High
 
@@ -72,3 +76,4 @@ Feature: Domain Event Dispatching
     Then the system should retry publishing according to retry policy
     And after retries, failed events should be moved to dead-letter queue
 ```
+

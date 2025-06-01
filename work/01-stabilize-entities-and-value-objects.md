@@ -11,8 +11,12 @@ Rationale: ensure domain consistency and integrity, providing a reliable foundat
 - Unit test coverage ≥ 90% for these classes.
 
 ## Estimate
-5 points
+**Story Points:** 5 points
 
+## Duration
+**Junior Developer:** 45 hours
+**Regular Developer:** 30 hours
+**Senior Developer:** 20 hours
 ## Priority
 High
 
@@ -80,3 +84,4 @@ Feature: Domain Model Invariants
     When an Address object is created
     Then a DomainValidationException should be thrown indicating "Street is required"
 ```
+

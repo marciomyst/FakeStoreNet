@@ -11,8 +11,12 @@ Rationale: enable safe database evolution, schema version control across differe
 - Integration tests verify that the schema created via migrations supports all CRUD operations.
 
 ## Estimate
-3 points
+**Story Points:** 3 points
 
+## Duration
+**Junior Developer:** 27 hours
+**Regular Developer:** 18 hours
+**Senior Developer:** 12 hours
 ## Priority
 High
 
@@ -78,3 +82,4 @@ Feature: Database Migrations
     When the CI pipeline checks for pending migrations
     Then the pipeline should fail with an error indicating pending migrations
 ```
+

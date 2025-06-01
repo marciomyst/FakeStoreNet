@@ -12,8 +12,12 @@ Rationale: separate responsibilities, organize order business logic, and lay the
 - Unit and integration tests cover order processing flows.
 
 ## Estimate
-5 points
+**Story Points:** 5 points
 
+## Duration
+**Junior Developer:** 45 hours
+**Regular Developer:** 30 hours
+**Senior Developer:** 20 hours
 ## Priority
 High
 
@@ -83,3 +87,4 @@ Feature: Order Processing Module
     When GetOrderByIdQueryHandler is executed with OrderId 1
     Then the returned OrderDto should match the persisted order data
 ```
+

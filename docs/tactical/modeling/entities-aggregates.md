@@ -50,8 +50,8 @@ classDiagram
         +Geolocation Geolocation
     }
     class Geolocation {
-        +string Latitude
-        +string Longitude
+        +decimal Latitude
+        +decimal Longitude
     }
     User --> Name
     User --> Address

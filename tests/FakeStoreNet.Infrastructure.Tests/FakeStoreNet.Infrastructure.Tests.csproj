@@ -6,19 +6,12 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>FakeStoreNet.Infrastructure.Tests</RootNamespace>
     <TargetFramework>net8.0</TargetFramework>
-    <!--
-    To enable the Microsoft Testing Platform 'dotnet test' experience, add property:
-      <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
-
-    To enable the Microsoft Testing Platform native command line experience, add property:
-      <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
-
-    For more information on Microsoft Testing Platform support in xUnit.net, please visit:
-      https://xunit.net/docs/getting-started/v3/microsoft-testing-platform
-    -->
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>    
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FakeStoreNet.Infrastructure\FakeStoreNet.Infrastructure.csproj" />
     <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
@@ -27,9 +20,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
-    <PackageReference Include="xunit.v3" Version="2.0.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.0" />
+  <PackageReference Include="coverlet.msbuild" Version="6.0.4">
+    <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+  </PackageReference>
+  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
+  <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.14.2" />
+  <PackageReference Include="xunit.v3" Version="2.0.2" />
+  <PackageReference Include="xunit.runner.visualstudio" Version="3.1.0" />
+  <PackageReference Include="Shouldly" Version="4.3.0" />
   </ItemGroup>
 
 </Project>

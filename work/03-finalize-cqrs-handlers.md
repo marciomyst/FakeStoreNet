@@ -11,8 +11,12 @@ Rationale: enable clear separation of concerns and improve maintainability and t
 - Documentation in the application layer is updated to reflect request ↔ handler mappings.
 
 ## Estimate
-5 points
+**Story Points:** 5 points
 
+## Duration
+**Junior Developer:** 45 hours
+**Regular Developer:** 30 hours
+**Senior Developer:** 20 hours
 ## Priority
 High
 
@@ -78,3 +82,4 @@ Feature: CQRS Handler Operations
     When GetProductByIdQueryHandler is executed with Id 999
     Then a NotFoundException should be thrown or null result returned
 ```
+
