@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace FakeStoreNet.Domain.Common
 {
     /// <summary>
@@ -5,6 +7,13 @@ namespace FakeStoreNet.Domain.Common
     /// </summary>
     public abstract class Entity
     {
+        private readonly List<IDomainEvent> _domainEvents = new();
+
+        /// <summary>
+        /// Gets the domain events raised by this entity.
+        /// </summary>
+        public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents;
+
         /// <summary>
         /// Gets the unique identifier for this entity.
         /// </summary>
@@ -29,5 +38,22 @@ namespace FakeStoreNet.Domain.Common
         /// </summary>
         /// <returns>A hash code for the current object.</returns>
         public override int GetHashCode() => (GetType().ToString() + Id).GetHashCode();
+
+        /// <summary>
+        /// Adds a domain event to the entity's event queue.
+        /// </summary>
+        /// <param name="domainEvent">The domain event to add.</param>
+        public void AddDomainEvent(IDomainEvent domainEvent)
+        {
+            _domainEvents.Add(domainEvent);
+        }
+
+        /// <summary>
+        /// Clears all domain events from the entity.
+        /// </summary>
+        public void ClearDomainEvents()
+        {
+            _domainEvents.Clear();
+        }
     }
 }
