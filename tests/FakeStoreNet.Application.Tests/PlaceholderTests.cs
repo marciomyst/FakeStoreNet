@@ -1,11 +1,10 @@
-namespace FakeStoreNet.Application.Tests
+namespace FakeStoreNet.Application.Tests;
+
+public class PlaceholderTests
 {
-    public class PlaceholderTests
+    [Fact]
+    public void PlaceholderTest()
     {
-        [Fact]
-        public void PlaceholderTest()
-        {
-            Assert.True(true);
-        }
+        Assert.True(true);
     }
 }

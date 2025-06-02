@@ -1,6 +1,6 @@
 # Run tests and collect coverage
 Write-Host "Running tests and collecting code coverage..."
-dotnet test --settings eng/coverlet.runsettings --collect:"Code Coverage" --results-directory CodeCoverageResults
+dotnet test --settings eng/coverlet.runsettings --collect:"Code Coverage" 
 
 # Procura todos os arquivos de cobertura gerados pelos projetos de teste
 $coverageFiles = Get-ChildItem -Path tests -Recurse -Filter coverage.cobertura.xml | Select-Object -ExpandProperty FullName

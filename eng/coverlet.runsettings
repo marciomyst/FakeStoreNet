@@ -2,10 +2,11 @@
 <RunSettings>
   <DataCollectionRunSettings>
     <DataCollectors>
-      <DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/1.0">
+      <DataCollector friendlyName="XPlat Code Coverage">
         <Configuration>
           <Format>cobertura</Format>
-        </Configuration>
+          <Exclude>[FluentValidation?]*</Exclude>
+          </Configuration>
       </DataCollector>
     </DataCollectors>
   </DataCollectionRunSettings>

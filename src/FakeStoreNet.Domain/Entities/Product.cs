@@ -78,5 +78,35 @@ namespace FakeStoreNet.Domain.Entities
 
             Price = newPrice;
         }
+
+        /// <summary>
+        /// Updates product details and raises a <see cref="ProductUpdatedEvent"/>.
+        /// </summary>
+        /// <param name="title">New title. Cannot be null or empty.</param>
+        /// <param name="price">New price. Must be non-negative.</param>
+        /// <param name="description">New description.</param>
+        /// <param name="category">New category. Cannot be null or empty.</param>
+        /// <param name="image">New image URL.</param>
+        /// <param name="rating">New rating. Cannot be null.</param>
+        public void UpdateDetails(string title, Money price, string description, string category, string image, Rating rating)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+                throw new DomainValidationException("Title is required");
+            if (price == null)
+                throw new DomainValidationException("Price is required");
+            if (string.IsNullOrWhiteSpace(category))
+                throw new DomainValidationException("Category is required");
+            if (rating == null)
+                throw new DomainValidationException("Rating is required");
+
+            Title = title;
+            Price = price;
+            Description = description;
+            Category = category;
+            Image = image;
+            Rating = rating;
+
+            AddDomainEvent(new ProductUpdatedEvent(Id, Id, Title, Price.Amount, Category));
+        }
     }
 }
