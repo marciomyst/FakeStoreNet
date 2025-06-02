@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FakeStoreNet.Domain\FakeStoreNet.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

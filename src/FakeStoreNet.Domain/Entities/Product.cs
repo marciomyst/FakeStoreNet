@@ -1,5 +1,6 @@
 using FakeStoreNet.Domain.Common;
 using FakeStoreNet.Domain.ValueObjects;
+using FakeStoreNet.Domain.Common.Events;
 
 namespace FakeStoreNet.Domain.Entities
 {
@@ -63,6 +64,7 @@ namespace FakeStoreNet.Domain.Entities
             Category = category;
             Image = image;
             Rating = rating ?? throw new DomainValidationException("Rating is required");
+            AddDomainEvent(new ProductCreatedEvent(Id, Id, Title, Price.Amount, Category));
         }
 
         /// <summary>
