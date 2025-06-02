@@ -38,55 +38,34 @@ jobs:
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
 
-      # --- INÍCIO: PASSOS DE CODE COVERAGE ---
-
       - name: Run Tests with Code Coverage
         shell: powershell
         run: |
-          # Limpa diretórios de resultados anteriores para evitar interferências
           Remove-Item -Path .\TestResults -Recurse -Force -ErrorAction SilentlyContinue
 
-          # **Ajuste AQUI:** Use 'FakeStoreNet.sln' para referenciar sua solução na raiz
-          # e '--collect "Coverlet Cobertura" para gerar o relatório de cobertura.
-          dotnet test "FakeStoreNet.sln" `
-            --collect "Coverlet Cobertura" `
-            --no-build ` # Assume que 'dotnet build' já foi executado
-            --logger "trx;LogFileName=test_results.trx" ` # Gera resultados de teste
-            /p:CoverletOutputFormat=cobertura `
-            /p:CoverletOutput="$(Build.SourcesDirectory)/TestResults/coverage/"
-        continue-on-error: true # Permite que o pipeline continue mesmo se os testes falharem.
-
-      - name: Generate SonarQube Coverage Report
+          dotnet test "FakeStoreNet.sln" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="${{ github.workspace }}/TestResults/coverage/" --no-build --logger "trx;LogFileName=test_results.trx" # AQUI!
+        continue-on-error: true
+      
+      - name: Run Tests with Code Coverage
         shell: powershell
         run: |
-          # Instala ReportGenerator como uma ferramenta local se ainda não foi (garante que está disponível)
-          dotnet tool install ReportGenerator --tool-path .\tools\reportgenerator -g
+          Remove-Item -Path .\TestResults -Recurse -Force -ErrorAction SilentlyContinue
 
-          # Usa a ferramenta instalada para gerar o relatório no formato SonarQube.
-          # O coverlet, quando executa testes via uma solução, normalmente mescla os resultados
-          # de cobertura em um único arquivo, por isso, este caminho deve estar correto.
-          & ".\tools\reportgenerator\reportgenerator.exe" `
-            "-reports:$(Build.SourcesDirectory)/TestResults/coverage/coverage.cobertura.xml" `
-            "-targetdir:$(Build.SourcesDirectory)/TestResults/SonarQubeCoverage" `
-            "-reporttypes:SonarQube"
-        continue-on-error: true # Permite que o pipeline continue mesmo se a geração do relatório falhar.
-
-      # --- FIM: PASSOS DE CODE COVERAGE ---
+          dotnet test "FakeStoreNet.sln" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="${{ github.workspace }}/TestResults/coverage/" --no-build --logger "trx;LogFileName=test_results.trx" # AQUI!
+        continue-on-error: true
 
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          # O SonarCloud Scanner precisa dos parâmetros para os relatórios de cobertura.
-          # O 'sonar.cs.opencover.reportsPaths' aponta para o arquivo gerado pelo ReportGenerator.
           .\.sonar\scanner\dotnet-sonarscanner begin `
             /k:"marciomyst_FakeStoreNet" `
             /o:"marciomyst" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.host.url="https://sonarcloud.io" `
-            /d:sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/TestResults/SonarQubeCoverage/SonarQube.xml"
-          
+            /d:sonar.cs.opencover.reportsPaths="${{ github.workspace }}/TestResults/SonarQubeCoverage/SonarQube.xml" # AQUI!
+
           dotnet build
-          
+
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
