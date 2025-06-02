@@ -129,7 +129,7 @@ $tf/
 
 # ReSharper is a .NET coding add-in
 _ReSharper*/
-*.[Rr]e[Ss]harper
+_ReSharper*/
 *.DotSettings.user
 
 # TeamCity is a build add-in
@@ -361,3 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/CodeCoverageResults/Report
