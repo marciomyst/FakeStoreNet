@@ -5,5 +5,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="OneOf" Version="3.0.271" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FakeStoreNet.Domain\FakeStoreNet.Domain.csproj" />
+    <ProjectReference Include="..\FakeStoreNet.Infrastructure\FakeStoreNet.Infrastructure.csproj" />
+  </ItemGroup>
 
 </Project>
