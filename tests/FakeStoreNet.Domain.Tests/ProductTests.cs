@@ -1,14 +1,13 @@
-using FakeStoreNet.Domain.Common;
 using FakeStoreNet.Domain.Entities;
+using FakeStoreNet.Domain.Exceptions;
 using FakeStoreNet.Domain.ValueObjects;
-using Shouldly;
 
 namespace FakeStoreNet.Domain.Tests
 {
     public class ProductTests
     {
-        private readonly Money ValidPrice = new Money(10m, "USD");
-        private readonly Rating ValidRating = new Rating(4.5, 10);
+        private readonly Money ValidPrice = new(10m, "USD");
+        private readonly Rating ValidRating = new(4.5, 10);
 
         [Fact(DisplayName = "Given valid parameters, when creating Product, then properties are assigned")]
         public void GivenValidParameters_WhenCreatingProduct_ThenPropertiesAreAssigned()

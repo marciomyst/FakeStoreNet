@@ -1,5 +1,3 @@
-using System;
-
 namespace FakeStoreNet.Domain.Common
 {
     /// <summary>

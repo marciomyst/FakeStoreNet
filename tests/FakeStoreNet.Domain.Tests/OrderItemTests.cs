@@ -1,7 +1,6 @@
-using FakeStoreNet.Domain.Common;
 using FakeStoreNet.Domain.Entities;
+using FakeStoreNet.Domain.Exceptions;
 using FakeStoreNet.Domain.ValueObjects;
-using Shouldly;
 
 namespace FakeStoreNet.Domain.Tests
 {

@@ -1,6 +1,5 @@
-using System.Collections.Concurrent;
-using System.Threading.Tasks;
 using FakeStoreNet.Domain.Common;
+using System.Collections.Concurrent;
 
 namespace FakeStoreNet.Infrastructure.EventDispatching
 {

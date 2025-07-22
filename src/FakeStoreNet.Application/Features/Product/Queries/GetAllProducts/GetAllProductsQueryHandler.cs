@@ -1,11 +1,8 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using AutoMapper;
-using MediatR;
-using FakeStoreNet.Application.Features.Product.Queries.GetAllProducts;
-using FakeStoreNet.Application.Features.Product.Queries;
+using FakeStoreNet.Application.Common;
 using FakeStoreNet.Domain.Common;
+using MediatR;
+using Microsoft.Extensions.Options;
 
 namespace FakeStoreNet.Application.Features.Product.Queries.GetAllProducts
 {
@@ -16,24 +13,33 @@ namespace FakeStoreNet.Application.Features.Product.Queries.GetAllProducts
     {
         private readonly IProductRepository _repository;
         private readonly IMapper _mapper;
+        private readonly ICacheService _cacheService;
+        private readonly CacheSettings _cacheSettings;
 
         /// <summary>
         /// Initializes a new instance of <see cref="GetAllProductsQueryHandler"/>.
         /// </summary>
         /// <param name="repository">Product repository.</param>
         /// <param name="mapper">AutoMapper mapper.</param>
-        public GetAllProductsQueryHandler(IProductRepository repository, IMapper mapper)
+        /// <param name="cacheService">Cache service.</param>
+        /// <param name="cacheSettings">Cache settings.</param>
+        public GetAllProductsQueryHandler(IProductRepository repository, IMapper mapper, ICacheService cacheService, IOptions<CacheSettings> cacheSettings)
         {
             _repository = repository;
             _mapper = mapper;
+            _cacheService = cacheService;
+            _cacheSettings = cacheSettings.Value;
         }
 
         /// <inheritdoc/>
-        public Task<IEnumerable<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
             var products = _repository.GetAll();
             var dtos = _mapper.Map<IEnumerable<ProductDto>>(products);
-            return Task.FromResult(dtos);
+            var cacheKey = "GetAllProducts";
+            var expiration = TimeSpan.FromSeconds(_cacheSettings.GetAllProductsAbsoluteExpirationInSeconds);
+            await _cacheService.SetAsync(cacheKey, dtos, absoluteExpiration: expiration);
+            return dtos;
         }
     }
 }

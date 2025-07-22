@@ -10,7 +10,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\FakeStoreNet.Infrastructure\FakeStoreNet.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\FakeStoreNet.Infrastructure\FakeStoreNet.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\FakeStoreNet.Application\FakeStoreNet.Application.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -23,7 +24,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
 		<PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.14.2" />
 		<PackageReference Include="NSubstitute" Version="5.3.0" />
 		<PackageReference Include="ReportGenerator" Version="5.4.7" /> 

@@ -1,10 +1,6 @@
-using System.Threading;
-using System.Threading.Tasks;
 using AutoMapper;
-using MediatR;
-using FakeStoreNet.Application.Features.Product.Queries.GetProductById;
-using FakeStoreNet.Application.Features.Product.Queries;
 using FakeStoreNet.Domain.Common;
+using MediatR;
 
 namespace FakeStoreNet.Application.Features.Product.Queries.GetProductById
 {

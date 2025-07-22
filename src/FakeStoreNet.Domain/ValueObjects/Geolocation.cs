@@ -1,4 +1,4 @@
-using FakeStoreNet.Domain.Common;
+using FakeStoreNet.Domain.Exceptions;
 
 namespace FakeStoreNet.Domain.ValueObjects
 {
@@ -40,7 +40,7 @@ namespace FakeStoreNet.Domain.ValueObjects
         /// </summary>
         /// <param name="obj">The object to compare.</param>
         /// <returns>True if the values are equal; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is not Geolocation other)
                 return false;

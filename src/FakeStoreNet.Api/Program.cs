@@ -1,4 +1,7 @@
 
+using FakeStoreNet.Application.Common;
+using FakeStoreNet.Infrastructure.Caching;
+
 namespace FakeStoreNet.Api
 {
     public class Program
@@ -12,6 +15,9 @@ namespace FakeStoreNet.Api
             builder.Services.AddSingleton<FakeStoreNet.Domain.Common.IEventLogRepository, FakeStoreNet.Infrastructure.EventDispatching.InMemoryEventLogRepository>();
 
             builder.Services.AddControllers();
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSingleton<ICacheService, MemoryCacheService>();
+            builder.Services.Configure<CacheSettings>(builder.Configuration.GetSection("CacheSettings"));
 
             var app = builder.Build();
 

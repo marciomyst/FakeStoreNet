@@ -1,14 +1,13 @@
-using FakeStoreNet.Domain.Common;
 using FakeStoreNet.Domain.Entities;
+using FakeStoreNet.Domain.Exceptions;
 using FakeStoreNet.Domain.ValueObjects;
-using Shouldly;
 
 namespace FakeStoreNet.Domain.Tests
 {
     public class UserTests
     {
-        private readonly Name ValidName = new Name("Jane", "Doe");
-        private readonly Address ValidAddress = new Address("Street", "1", "City", "00000", new Geolocation("0", "0"));
+        private readonly Name ValidName = new("Jane", "Doe");
+        private readonly Address ValidAddress = new("Street", "1", "City", "00000", new Geolocation("0", "0"));
 
         [Fact(DisplayName = "Given valid parameters, when creating User, then properties are assigned")]
         public void GivenValidParameters_WhenCreatingUser_ThenPropertiesAreAssigned()

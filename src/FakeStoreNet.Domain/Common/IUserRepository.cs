@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using FakeStoreNet.Domain.Entities;
 
 namespace FakeStoreNet.Domain.Common
