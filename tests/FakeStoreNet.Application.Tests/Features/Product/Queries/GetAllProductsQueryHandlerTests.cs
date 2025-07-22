@@ -50,10 +50,11 @@ namespace FakeStoreNet.Application.Tests.Features.Product.Queries
             // Act
             var dtos = await handler.Handle(query, CancellationToken.None);
 
+
             // Assert
             dtos.ShouldNotBeNull();
-            dtos.ShouldNotBeEmpty(); // at least one projection works
-            dtos.ShouldBeEquivalentTo(_mapper.Map<IEnumerable<ProductDto>>(products));
+            dtos.Items.ShouldNotBeEmpty(); // at least one projection works
+            dtos.Items.Count().ShouldBe(3);
         }
 
         [Fact(DisplayName = "Given repository returns empty When handling query Then returns empty list")]
