@@ -1,4 +1,5 @@
 using FakeStoreNet.Domain.Common;
+using FakeStoreNet.Domain.Exceptions;
 
 namespace FakeStoreNet.Domain.Entities
 {

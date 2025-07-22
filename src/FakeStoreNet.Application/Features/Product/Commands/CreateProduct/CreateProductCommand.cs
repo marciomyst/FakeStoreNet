@@ -1,6 +1,6 @@
+using FakeStoreNet.Domain.Exceptions;
 using MediatR;
 using OneOf;
-using FakeStoreNet.Domain.Common;
 
 namespace FakeStoreNet.Application.Features.Product.Commands.CreateProduct
 {

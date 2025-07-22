@@ -1,52 +1,45 @@
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+using FakeStoreNet.Application.Common;
+using FakeStoreNet.Domain.Common;
+using FakeStoreNet.Domain.Exceptions;
+using FakeStoreNet.Domain.ValueObjects;
 using MediatR;
 using OneOf;
-using FakeStoreNet.Domain.Common;
-using FakeStoreNet.Domain.ValueObjects;
-using FakeStoreNet.Application.Features.Product.Commands.UpdateProduct;
 
 namespace FakeStoreNet.Application.Features.Product.Commands.UpdateProduct
 {
     /// <summary>
     /// Handles <see cref="UpdateProductCommand"/> to update an existing product.
     /// </summary>
-    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, OneOf<Unit, DomainValidationException>>
+    /// <remarks>
+    /// Initializes a new instance of <see cref="UpdateProductCommandHandler"/>.
+    /// </remarks>
+    /// <param name="repository">Product repository.</param>
+    /// <param name="cacheService">Cache service.</param>
+    public class UpdateProductCommandHandler(IProductRepository repository, ICacheService cacheService) : IRequestHandler<UpdateProductCommand, OneOf<Unit, DomainValidationException>>
     {
-        private readonly IProductRepository _repository;
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="UpdateProductCommandHandler"/>.
-        /// </summary>
-        /// <param name="repository">Product repository.</param>
-        public UpdateProductCommandHandler(IProductRepository repository)
-        {
-            _repository = repository;
-        }
-
         /// <inheritdoc/>
-        public Task<OneOf<Unit, DomainValidationException>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task<OneOf<Unit, DomainValidationException>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(request.Title))
                     throw new DomainValidationException("Title is required");
-                var product = _repository.GetById(request.Id);
+                var product = repository.GetById(request.Id);
                 product.UpdateDetails(
                     request.Title,
-new Money(request.Price, product.Price.Currency),
+                    new Money(request.Price, product.Price.Currency),
                     request.Description,
                     request.Category,
                     request.Image,
                     new Rating(request.Rate, request.Count)
                 );
-                _repository.Update(product);
-                return Task.FromResult<OneOf<Unit, DomainValidationException>>(Unit.Value);
+                repository.Update(product);
+                await cacheService.RemoveAsync("GetAllProducts");
+                return Unit.Value;
             }
             catch (DomainValidationException ex)
             {
-                return Task.FromResult<OneOf<Unit, DomainValidationException>>(ex);
+                return ex;
             }
         }
     }

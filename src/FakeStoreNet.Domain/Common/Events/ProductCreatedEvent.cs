@@ -1,6 +1,3 @@
-using System;
-using FakeStoreNet.Domain.Common;
-
 namespace FakeStoreNet.Domain.Common.Events
 {
     /// <summary>

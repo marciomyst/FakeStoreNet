@@ -1,18 +1,12 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using AutoMapper;
-using Bogus;
-using NSubstitute;
-using Shouldly;
-using Xunit;
-using FakeStoreNet.Application.Features.Product.Queries.GetAllProducts;
-using FakeStoreNet.Application.Features.Product.Queries;
 using FakeStoreNet.Application.Common;
+using FakeStoreNet.Application.Features.Product.Queries;
+using FakeStoreNet.Application.Features.Product.Queries.GetAllProducts;
 using FakeStoreNet.Domain.Common;
-using FakeStoreNet.Domain.Entities;
-using DomainProduct = FakeStoreNet.Domain.Entities.Product;
 using FakeStoreNet.Domain.ValueObjects;
+using Microsoft.Extensions.Options;
+using NSubstitute;
+using DomainProduct = FakeStoreNet.Domain.Entities.Product;
 
 namespace FakeStoreNet.Application.Tests.Features.Product.Queries
 {
@@ -49,7 +43,9 @@ namespace FakeStoreNet.Application.Tests.Features.Product.Queries
             _repository.GetAll().Returns(products);
 
             var query = new GetAllProductsQuery();
-            var handler = new GetAllProductsQueryHandler(_repository, _mapper);
+            var cacheService = Substitute.For<ICacheService>();
+            var cacheSettings = Options.Create(new CacheSettings { GetAllProductsAbsoluteExpirationInSeconds = 60 });
+            var handler = new GetAllProductsQueryHandler(_repository, _mapper, cacheService, cacheSettings);
 
             // Act
             var dtos = await handler.Handle(query, CancellationToken.None);
@@ -67,7 +63,9 @@ namespace FakeStoreNet.Application.Tests.Features.Product.Queries
             _repository.GetAll().Returns(new List<DomainProduct>());
 
             var query = new GetAllProductsQuery();
-            var handler = new GetAllProductsQueryHandler(_repository, _mapper);
+            var cacheService = Substitute.For<ICacheService>();
+            var cacheSettings = Options.Create(new CacheSettings { GetAllProductsAbsoluteExpirationInSeconds = 60 });
+            var handler = new GetAllProductsQueryHandler(_repository, _mapper, cacheService, cacheSettings);
 
             // Act
             var dtos = await handler.Handle(query, CancellationToken.None);

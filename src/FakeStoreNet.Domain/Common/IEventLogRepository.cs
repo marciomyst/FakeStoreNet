@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-
 namespace FakeStoreNet.Domain.Common
 {
     /// <summary>

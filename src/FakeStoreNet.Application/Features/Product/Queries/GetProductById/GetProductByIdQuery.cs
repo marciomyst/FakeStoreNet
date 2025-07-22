@@ -1,5 +1,4 @@
 using MediatR;
-using FakeStoreNet.Application.Features.Product.Queries;
 
 namespace FakeStoreNet.Application.Features.Product.Queries.GetProductById
 {

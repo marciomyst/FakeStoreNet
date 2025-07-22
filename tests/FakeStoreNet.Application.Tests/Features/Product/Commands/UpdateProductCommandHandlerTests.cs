@@ -1,14 +1,8 @@
-using System.Threading;
-using System.Threading.Tasks;
-using Bogus;
-using NSubstitute;
-using OneOf;
-using Shouldly;
-using Xunit;
+using FakeStoreNet.Application.Common;
 using FakeStoreNet.Application.Features.Product.Commands.UpdateProduct;
 using FakeStoreNet.Domain.Common;
-using FakeStoreNet.Domain.Entities;
 using FakeStoreNet.Domain.ValueObjects;
+using NSubstitute;
 using DomainProduct = FakeStoreNet.Domain.Entities.Product;
 
 namespace FakeStoreNet.Application.Tests.Features.Product.Commands
@@ -45,7 +39,8 @@ namespace FakeStoreNet.Application.Tests.Features.Product.Commands
                 Count = 50
             };
 
-            var handler = new UpdateProductCommandHandler(_repository);
+            var cacheService = Substitute.For<ICacheService>();
+            var handler = new UpdateProductCommandHandler(_repository, cacheService);
 
             // Act
             var result = await handler.Handle(command, CancellationToken.None);
@@ -77,7 +72,8 @@ namespace FakeStoreNet.Application.Tests.Features.Product.Commands
                 Count = -1
             };
 
-            var handler = new UpdateProductCommandHandler(_repository);
+            var cacheService = Substitute.For<ICacheService>();
+            var handler = new UpdateProductCommandHandler(_repository, cacheService);
 
             // Act
             var result = await handler.Handle(command, CancellationToken.None);

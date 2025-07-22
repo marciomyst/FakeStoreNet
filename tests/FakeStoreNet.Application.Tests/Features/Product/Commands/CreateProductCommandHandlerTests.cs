@@ -1,15 +1,8 @@
-using System.Threading;
-using System.Threading.Tasks;
-using Bogus;
-using NSubstitute;
-using OneOf;
-using Shouldly;
-using Xunit;
+using FakeStoreNet.Application.Common;
 using FakeStoreNet.Application.Features.Product.Commands.CreateProduct;
 using FakeStoreNet.Domain.Common;
-using FakeStoreNet.Domain.Common.Events;
-using FakeStoreNet.Domain.Entities;
-using FakeStoreNet.Domain.ValueObjects;
+using FakeStoreNet.Domain.Exceptions;
+using NSubstitute;
 
 namespace FakeStoreNet.Application.Tests.Features.Product.Commands
 {
@@ -45,7 +38,8 @@ namespace FakeStoreNet.Application.Tests.Features.Product.Commands
                     capturedId = product.Id;
                 });
 
-            var handler = new CreateProductCommandHandler(_repository, null!);
+            var cacheService = Substitute.For<ICacheService>();
+            var handler = new CreateProductCommandHandler(_repository, cacheService);
 
             // Act
             var result = await handler.Handle(command, CancellationToken.None);
@@ -99,7 +93,8 @@ namespace FakeStoreNet.Application.Tests.Features.Product.Commands
                 .When(r => r.Add(Arg.Any<Domain.Entities.Product>()))
                 .Do(callInfo => throw new DomainValidationException("Test error"));
 
-            var handler = new CreateProductCommandHandler(_repository, null!);
+            var cacheService = Substitute.For<ICacheService>();
+            var handler = new CreateProductCommandHandler(_repository, cacheService);
 
             // Act
             var result = await handler.Handle(command, CancellationToken.None);

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace FakeStoreNet.Domain.Common
 {
     /// <summary>
@@ -24,7 +22,7 @@ namespace FakeStoreNet.Domain.Common
         /// </summary>
         /// <param name="obj">The object to compare with this instance.</param>
         /// <returns>True if the specified object is equal to this instance; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is not Entity other || GetType() != other.GetType())
                 return false;

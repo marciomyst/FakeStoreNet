@@ -1,12 +1,11 @@
-using FakeStoreNet.Domain.Common;
+using FakeStoreNet.Domain.Exceptions;
 using FakeStoreNet.Domain.ValueObjects;
-using Shouldly;
 
 namespace FakeStoreNet.Domain.Tests
 {
     public class AddressTests
     {
-        private readonly Geolocation ValidGeo = new Geolocation("12.34", "56.78");
+        private readonly Geolocation ValidGeo = new("12.34", "56.78");
 
         [Fact(DisplayName = "Given valid address data, when creating Address, then properties are assigned")]
         public void GivenValidAddress_WhenCreatingAddress_ThenPropertiesAreAssigned()
@@ -42,8 +41,10 @@ namespace FakeStoreNet.Domain.Tests
         [Fact(DisplayName = "Given null geolocation, when creating Address, then DomainValidationException is thrown")]
         public void GivenNullGeolocation_WhenCreatingAddress_ThenDomainValidationException()
         {
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             Should.Throw<DomainValidationException>(() => new Address("St", "1", "City", "00000", null))
                   .Message.ShouldBe("Geolocation is required");
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         }
     }
 }

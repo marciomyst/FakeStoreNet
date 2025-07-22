@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using MediatR;
 
 namespace FakeStoreNet.Application.Features.Product.Queries.GetAllProducts

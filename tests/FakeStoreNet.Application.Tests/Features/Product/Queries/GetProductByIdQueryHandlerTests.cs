@@ -1,23 +1,17 @@
-using System.Threading;
-using System.Threading.Tasks;
 using AutoMapper;
-using Bogus;
-using NSubstitute;
-using Shouldly;
-using Xunit;
-using FakeStoreNet.Application.Features.Product.Queries.GetProductById;
-using FakeStoreNet.Application.Features.Product.Queries;
 using FakeStoreNet.Application.Common;
+using FakeStoreNet.Application.Features.Product.Queries.GetProductById;
 using FakeStoreNet.Domain.Common;
-using FakeStoreNet.Domain.Entities;
-using DomainProduct = FakeStoreNet.Domain.Entities.Product;
+using FakeStoreNet.Domain.Exceptions;
 using FakeStoreNet.Domain.ValueObjects;
+using NSubstitute;
+using DomainProduct = FakeStoreNet.Domain.Entities.Product;
 
 namespace FakeStoreNet.Application.Tests.Features.Product.Queries
 {
     public class GetProductByIdQueryHandlerTests
     {
-        private readonly Faker _faker = new Faker();
+        private readonly Faker _faker = new();
         private readonly IProductRepository _repository = Substitute.For<IProductRepository>();
         private readonly IMapper _mapper;
 

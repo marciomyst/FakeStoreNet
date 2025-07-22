@@ -1,9 +1,6 @@
-using System.Linq;
 using FakeStoreNet.Domain.Common.Events;
 using FakeStoreNet.Domain.Entities;
 using FakeStoreNet.Domain.ValueObjects;
-using Shouldly;
-using Xunit;
 
 namespace FakeStoreNet.Domain.Tests
 {

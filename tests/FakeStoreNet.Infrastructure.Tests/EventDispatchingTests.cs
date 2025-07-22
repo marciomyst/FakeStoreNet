@@ -1,11 +1,7 @@
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
 using FakeStoreNet.Domain.Common;
 using FakeStoreNet.Domain.Common.Events;
 using FakeStoreNet.Infrastructure.EventDispatching;
-using Shouldly;
-using Xunit;
+using System.Text.Json;
 
 namespace FakeStoreNet.Infrastructure.Tests
 {

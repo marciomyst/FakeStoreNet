@@ -1,6 +1,7 @@
 using FakeStoreNet.Domain.Common;
-using FakeStoreNet.Domain.ValueObjects;
 using FakeStoreNet.Domain.Common.Events;
+using FakeStoreNet.Domain.Exceptions;
+using FakeStoreNet.Domain.ValueObjects;
 
 namespace FakeStoreNet.Domain.Entities
 {
