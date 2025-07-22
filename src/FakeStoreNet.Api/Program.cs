@@ -1,6 +1,13 @@
-
 using FakeStoreNet.Application.Common;
 using FakeStoreNet.Infrastructure.Caching;
+using FluentValidation;
+using FakeStoreNet.Application.Features.Product.Commands.CreateProduct;
+using FakeStoreNet.Application.Features.Product.Commands.UpdateProduct;
+using FakeStoreNet.Application.Features.Product.Commands.DeleteProduct;
+using MediatR;
+using FakeStoreNet.Domain.Exceptions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace FakeStoreNet.Api
 {
@@ -14,12 +21,42 @@ namespace FakeStoreNet.Api
             builder.Services.AddSingleton<FakeStoreNet.Domain.Common.IEventBus, FakeStoreNet.Infrastructure.EventDispatching.InMemoryEventBus>();
             builder.Services.AddSingleton<FakeStoreNet.Domain.Common.IEventLogRepository, FakeStoreNet.Infrastructure.EventDispatching.InMemoryEventLogRepository>();
 
+            // Register controllers and caching
             builder.Services.AddControllers();
             builder.Services.AddMemoryCache();
             builder.Services.AddSingleton<ICacheService, MemoryCacheService>();
             builder.Services.Configure<CacheSettings>(builder.Configuration.GetSection("CacheSettings"));
 
+            // Register FluentValidation validators
+            builder.Services.AddTransient<IValidator<CreateProductCommand>, CreateProductCommandValidator>();
+            builder.Services.AddTransient<IValidator<UpdateProductCommand>, UpdateProductCommandValidator>();
+            builder.Services.AddTransient<IValidator<DeleteProductCommand>, DeleteProductCommandValidator>();
+
+            // Register validation pipeline behavior
+            builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
             var app = builder.Build();
+
+            // Global exception handling for domain validation errors
+            app.Use(async (context, next) =>
+            {
+                try
+                {
+                    await next();
+                }
+                catch (DomainValidationException ex)
+                {
+                    context.Response.ContentType = "application/problem+json";
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    var problem = new ValidationProblemDetails
+                    {
+                        Title = "Validation Failed",
+                        Detail = ex.Message,
+                        Status = StatusCodes.Status400BadRequest
+                    };
+                    await context.Response.WriteAsJsonAsync(problem);
+                }
+            });
 
             // Configure domain event subscriptions
             var eventBus = app.Services.GetRequiredService<FakeStoreNet.Domain.Common.IEventBus>();
