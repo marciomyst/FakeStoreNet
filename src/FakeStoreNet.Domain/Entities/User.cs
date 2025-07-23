@@ -1,5 +1,6 @@
 using FakeStoreNet.Domain.Common;
 using FakeStoreNet.Domain.Exceptions;
+using System.Net.Mail;
 using FakeStoreNet.Domain.ValueObjects;
 
 namespace FakeStoreNet.Domain.Entities
@@ -50,6 +51,9 @@ namespace FakeStoreNet.Domain.Entities
 
             if (string.IsNullOrWhiteSpace(email))
                 throw new DomainValidationException("Email is required");
+
+            if (!MailAddress.TryCreate(email, out _))
+                throw new DomainValidationException("Email format is invalid");
 
             if (string.IsNullOrWhiteSpace(passwordHash))
                 throw new DomainValidationException("PasswordHash is required");

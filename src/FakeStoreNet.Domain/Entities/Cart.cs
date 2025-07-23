@@ -1,5 +1,8 @@
 using FakeStoreNet.Domain.Common;
 using FakeStoreNet.Domain.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FakeStoreNet.Domain.Entities
 {
@@ -36,7 +39,7 @@ namespace FakeStoreNet.Domain.Entities
 
             UserId = userId;
             Date = DateTime.UtcNow;
-            _items = [];
+            _items = new List<CartItem>();
         }
 
         /// <summary>

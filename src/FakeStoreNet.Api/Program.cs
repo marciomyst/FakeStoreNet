@@ -5,6 +5,8 @@ using FakeStoreNet.Application.Features.Product.Commands.CreateProduct;
 using FakeStoreNet.Application.Features.Product.Commands.UpdateProduct;
 using FakeStoreNet.Application.Features.Product.Commands.DeleteProduct;
 using MediatR;
+using FakeStoreNet.Application.Features.Product.Queries.GetAllProducts;
+using FakeStoreNet.Application.Features.Product.Queries.GetProductById;
 using FakeStoreNet.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +33,8 @@ namespace FakeStoreNet.Api
             builder.Services.AddTransient<IValidator<CreateProductCommand>, CreateProductCommandValidator>();
             builder.Services.AddTransient<IValidator<UpdateProductCommand>, UpdateProductCommandValidator>();
             builder.Services.AddTransient<IValidator<DeleteProductCommand>, DeleteProductCommandValidator>();
+            builder.Services.AddTransient<IValidator<GetAllProductsQuery>, GetAllProductsQueryValidator>();
+            builder.Services.AddTransient<IValidator<GetProductByIdQuery>, GetProductByIdQueryValidator>();
 
             // Register validation pipeline behavior
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
