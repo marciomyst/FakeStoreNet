@@ -51,7 +51,7 @@ namespace FakeStoreNet.Application.Common
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is PagedResult<T> other)
             {

@@ -17,24 +17,20 @@ namespace FakeStoreNet.Application.Features.Product.Queries.GetAllProducts
                 .InclusiveBetween(1, 100)
                 .WithMessage("'pageSize' must be between 1 and 100.");
 
-            When(q => q.MinPrice.HasValue, () =>
-            {
-                RuleFor(q => q.MinPrice.Value)
-                    .GreaterThanOrEqualTo(0M)
-                    .WithMessage("'minPrice' must be non-negative.");
-            });
+            RuleFor(q => q.MinPrice.GetValueOrDefault())
+                .GreaterThanOrEqualTo(0M)
+                .WithMessage("'minPrice' must be non-negative.")
+                .When(q => q.MinPrice.HasValue);
 
-            When(q => q.MaxPrice.HasValue, () =>
-            {
-                RuleFor(q => q.MaxPrice.Value)
-                    .GreaterThanOrEqualTo(0M)
-                    .WithMessage("'maxPrice' must be non-negative.");
-            });
+            RuleFor(q => q.MaxPrice.GetValueOrDefault())
+                .GreaterThanOrEqualTo(0M)
+                .WithMessage("'maxPrice' must be non-negative.")
+                .When(q => q.MaxPrice.HasValue);
 
             When(q => q.MinPrice.HasValue && q.MaxPrice.HasValue, () =>
             {
                 RuleFor(q => q)
-                    .Must(q => q.MinPrice.Value <= q.MaxPrice.Value)
+                    .Must(q => q.MinPrice.GetValueOrDefault() <= q.MaxPrice.GetValueOrDefault())
                     .WithMessage("'minPrice' must be less than or equal to 'maxPrice'.");
             });
         }
